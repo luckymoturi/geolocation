@@ -33,6 +33,7 @@ npm install
 # or
 yarn install
 
+AND
 #Backend
 
 node index.js
