@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import { Home, Briefcase, Users } from 'lucide-react';
 
@@ -28,7 +28,6 @@ export const LocationSelector = () => {
     libraries: ['places'],
   });
 
-  const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
   const [location, setLocation] = useState(center);
   const [address, setAddress] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -39,7 +38,7 @@ export const LocationSelector = () => {
     area: '',
     type: 'home',
   });
-  const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [, setEditingAddress] = useState<Address | null>(null);
 
   useEffect(() => {
     fetchSavedAddresses();
@@ -55,17 +54,6 @@ export const LocationSelector = () => {
     }
   };
 
-  const onPlaceChanged = () => {
-    if (autocomplete !== null) {
-      const place = autocomplete.getPlace();
-      if (place.geometry) {
-        setLocation({
-          lat: place.geometry?.location?.lat() || center.lat,
-          lng: place.geometry?.location?.lng() || center.lng,
-        });
-      }
-    }
-  };
 
   const handleLocationChange = (e: google.maps.MapMouseEvent) => {
     if (e.latLng) {
